@@ -1,8 +1,8 @@
 {
   "name": "ytdp",
-  "version": "1.2.0",
+  "version": "2.2.0",
   "description": "youtube scraper",
-  "main": "ytd.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,8 +13,11 @@
   "author": "Sadgman",
   "license": "ISC",
   "dependencies": {
-    "dl-vampire": "^2.1.2",
-    "node-fetch": "^3.3.2",
-    "puppeteer": "^22.15.0"
+    "@distube/ytdl-core": "^4.16.5",
+    "puppeteer": "^22.15.0",
+    "readline-sync": "^1.4.10",
+    "sharp": "^0.33.5",
+    "terminal-image": "^3.1.1",
+    "user-agents": "^1.1.494"
   }
 }
