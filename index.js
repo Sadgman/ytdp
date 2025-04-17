@@ -26,7 +26,7 @@ class manager extends base{
                 await strategy.instance.createPage(url, outputFilePath, type, cook);
                 return true;
             } catch(e){
-                console.error('Error en la estrategia ' + strategy.name + 'reintentando...');
+                console.error('Error en la estrategia ' + strategy.name + ' reintentando...');
             }
         }
         return new Error('No se pudo descargar el video con ninguna estrategia.');
