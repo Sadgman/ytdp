@@ -15,8 +15,8 @@ class manager extends base{
         this.ValidateUrl = ytutil.ValidateUrlYt;
         this.strategies = [
             {name: 'y2matevet', instance: new y2matevet()},
-            {name: 'ytdl', instance: new ytdl()},
             {name: 'snapany', instance: new snapany()},
+            {name: 'ytdl', instance: new ytdl()},
             {name: 'savefromnet', instance: new savefromnet()}
         ];
     }
@@ -26,7 +26,7 @@ class manager extends base{
                 await strategy.instance.createPage(url, outputFilePath, type, cook);
                 return true;
             } catch(e){
-                console.error(`Error en ${strategy.name} : ${e.message}`);
+                console.error('Error en la estrategia ' + strategy.name + 'reintentando...');
             }
         }
         return new Error('No se pudo descargar el video con ninguna estrategia.');

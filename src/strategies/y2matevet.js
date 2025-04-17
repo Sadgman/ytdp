@@ -60,7 +60,7 @@ class y2matevet extends base {
             await this.download(link, outputFilePath, type);
             return true;
         }catch(e){
-            return new Error('Error en y2matevet: ' + e.message);
+            throw new Error('Error en y2matevet: ' + e.message);
         }finally {
             if(page) await page.close();
         }

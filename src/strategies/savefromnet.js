@@ -44,10 +44,9 @@ class savefromnet extends base {
                     },
                 ])
                 .png()
-                .toFile('../data/captcha.png');
-
+                .toFile(__dirname.match(/.+(?=strategies)/)[0] + 'core/data/captcha.png');
                 const terminalImage = await import('terminal-image');
-                console.log(await terminalImage.default.file('../data/captcha.png', { width: '80%', height: '80%' }));
+                await terminalImage.default.file( __dirname.match(/.+(?=strategies)/)[0] + 'core/data/captcha.png', { width: '80%', height: '80%' });
                 const captcha = readline.question('Captcha: ');
                 await page.type('.captcha-dialog__input__ctr input[name=val]', captcha);
                 await page.click('.captcha-dialog__button');
@@ -81,7 +80,7 @@ class savefromnet extends base {
                     break;
                 }
             }
-            
+
             await this.download(href, outputFilePath, type);
             return true;
         }catch(e){
