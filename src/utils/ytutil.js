@@ -28,7 +28,7 @@ class ytsearch extends base {
      */
     async getVideoIdYt(url){
         // Si la url tiene dos signos de igual, devuelve el texto entre los dos signos de igual
-        if(url.match(/=/g)?.length === 2) return url.match(/(?<==)[^=]+(?==)/)[0];
+        if(url.match(/=/g)?.length >= 2) return url.match(/(?<==)[^=]+(?==)/)[0];
         // retorna el id buscando el signo de igual, devuelve todo lo de despues y si no lo encuentra
         // busca / y devuelve lo que hay despues
         return url.match(/(?<==).+(?!(.*[^/]+$))|([^/]+$)(?<!.*(?<==).+)/)[0];
