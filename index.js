@@ -20,12 +20,21 @@ class manager extends base{
             {name: 'savefromnet', instance: new savefromnet()}
         ];
     }
-    async download(url, outputFilePath, type = 'audio', options = { cook: null, AutoSearch: true }) {
+    /**
+     * 
+     * @param {string} url url del video de youtube o el nombre del video
+     * @param {string} type tipo de descarga 'audio' o 'video'
+     * @param {string} outputFilePath directorio donde se guardara el video
+     * @param {object} options { cook: cookies, AutoFileNameID: true o false da un nombre automático , AutoSearch: true o false, busca el video }
+     * @returns {Promise<boolean>} true si se descargo el video
+     */
+    async download(url, type = 'audio', outputFilePath, options = { cook: null, AutoFileNameID: true, AutoSearch: true }) {
         if(options.AutoSearch) url = await this.ValidateUrl(url) ? url : (await this.SearchYt(url))[0];
         
         for(const strategy of this.strategies){
             try{
-                await strategy.instance.createPage(url, outputFilePath, type, options.cook);
+                await strategy.instance.createPage(url, options.AutoFileNameID? (await this.getVideoId(url)) + (type === 'audio'? '.mp3' : '.mp4'): 
+                outputFilePath, type, options.cook);
                 return true;
             } catch(e){
                 console.error('Error en la estrategia ' + strategy.name + ' reintentando...');
