@@ -20,10 +20,12 @@ class manager extends base{
             {name: 'savefromnet', instance: new savefromnet()}
         ];
     }
-    async download(url, outputFilePath, type = 'audio', cook = null){
+    async download(url, outputFilePath, type = 'audio', options = { cook: null, AutoSearch: true }) {
+        if(options.AutoSearch) url = await this.ValidateUrl(url) ? url : (await this.SearchYt(url))[0];
+        
         for(const strategy of this.strategies){
             try{
-                await strategy.instance.createPage(url, outputFilePath, type, cook);
+                await strategy.instance.createPage(url, outputFilePath, type, options.cook);
                 return true;
             } catch(e){
                 console.error('Error en la estrategia ' + strategy.name + ' reintentando...');
