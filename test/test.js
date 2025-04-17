@@ -6,8 +6,9 @@ const fs = require('fs');
 // savefromnet.download('https://www.youtube.com/shorts/HvootjFlBAY', 'audio2.mp3', 'audio')
 (async ()=>{
     // await ytdp.download('https://www.youtube.com/watch?v=uKxyLmbOc0Q&list=RDGMEMXdNDEg4wQ96My0DhjI-cIgVMuKxyLmbOc0Q&start_radio=1', 'audio3.mp4', 'video')
-    // await ytdp.download('gogogo', 'video');
-    await ytdp.download('https://www.youtube.com/shorts/HvootjFlBAY', 'audio', './src/jorgito.mp3', {AutoFileNameID: false, AutoSearch: false});
+    const outputFilePath = await ytdp.download('gogogo meme', 'video', './src/');
+    // const url = await ytdp.download('https://www.youtube.com/shorts/HvootjFlBAY', 'audio', './src/jorgito.mp3', {AutoFileNameID: false, AutoSearch: false});
+    console.log(outputFilePath);
 
 })()
 

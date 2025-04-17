@@ -28,14 +28,14 @@ class manager extends base{
      * @param {object} options { cook: cookies, AutoFileNameID: true o false da un nombre automático , AutoSearch: true o false, busca el video }
      * @returns {Promise<boolean>} true si se descargo el video
      */
-    async download(url, type = 'audio', outputFilePath, options = { cook: null, AutoFileNameID: true, AutoSearch: true }) {
+    async download(url, type = 'audio', outputFilePath='', options = { cook: null, AutoFileNameID: true, AutoSearch: true }) {
         if(options.AutoSearch) url = await this.ValidateUrl(url) ? url : (await this.SearchYt(url))[0];
-        
+        outputFilePath = options.AutoFileNameID? outputFilePath + (await this.getVideoId(url)) + (type === 'audio'? '.mp3' : '.mp4'): outputFilePath;
+
         for(const strategy of this.strategies){
             try{
-                await strategy.instance.createPage(url, options.AutoFileNameID? (await this.getVideoId(url)) + (type === 'audio'? '.mp3' : '.mp4'): 
-                outputFilePath, type, options.cook);
-                return true;
+                await strategy.instance.createPage(url, outputFilePath , type, options.cook);
+                return outputFilePath;
             } catch(e){
                 console.error('Error en la estrategia ' + strategy.name + ' reintentando...');
             }
