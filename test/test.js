@@ -1,5 +1,4 @@
 const ytdp = require('../index');
-const fs = require('fs');
 
 // savefromnet.download('https://youtube.com/shorts/a79CFiVsHNk?si=PW1dOxwpu5tk1EXK', 'audio.mp3', 'audio')
 
