@@ -4,7 +4,9 @@ const y2matevet = require('./src/strategies/y2matevet');
 const ytdl = require('./src/strategies/ytdl');
 const snapany = require('./src/strategies/snapany');
 const savefromnet = require('./src/strategies/savefromnet');
+const fs = require('fs');
 let ytutil = require('./src/utils/ytutil');
+
 ytutil = new ytutil();
 
 class manager extends base{
@@ -25,12 +27,14 @@ class manager extends base{
      * @param {string} url url del video de youtube o el nombre del video
      * @param {string} type tipo de descarga 'audio' o 'video'
      * @param {string} outputFilePath directorio donde se guardara el video
-     * @param {object} options { cook: cookies, AutoFileNameID: true o false da un nombre automático , AutoSearch: true o false, busca el video }
+     * @param {object} options { cook: cookies, AutoFileNameID: true o false da un nombre automático , AutoSearch: true o false, busca el video, ReplaceFile: true o false, reemplaza el archivo si ya existe}
      * @returns {Promise<boolean>} true si se descargo el video
      */
-    async download(url, type = 'audio', outputFilePath='', options = { cook: null, AutoFileNameID: true, AutoSearch: true }) {
+    async download(url, type = 'audio', outputFilePath='', options = { cook: null, AutoFileNameID: true, AutoSearch: true, ReplaceFile: false }){ 
         if(options.AutoSearch) url = await this.ValidateUrl(url) ? url : (await this.SearchYt(url))[0];
         outputFilePath = options.AutoFileNameID? outputFilePath + (await this.getVideoId(url)) + (type === 'audio'? '.mp3' : '.mp4'): outputFilePath;
+
+        if(fs.existsSync(outputFilePath) && !options.ReplaceFile) return outputFilePath;
 
         for(const strategy of this.strategies){
             try{
