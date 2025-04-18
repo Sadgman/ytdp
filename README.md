@@ -2,6 +2,11 @@
 
 This a package for Download Audio and Video from different Social Media: Youtube, Instagram, Tiktok, etc.
 
+# Installation
+```bash
+npm install ytdp
+```
+
 # Basic Use 
 
 This will download the file to the current directory
