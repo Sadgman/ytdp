@@ -50,7 +50,7 @@ class snapany extends base {
             await this.download(href, outputFilePath, type);
             return true;
         }catch(e){
-            return new Error('Error en snapany: ' + e.message);
+            throw new Error('Error en snapany: ' + e.message);
         } finally {
             if(page) await page.close();
         }

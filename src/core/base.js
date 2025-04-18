@@ -67,12 +67,18 @@ class base {
      */
     async download(url, outputFilePath, type) {
         try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`Error al descargar el archivo: ${response.statusText}`);
+            let nodeStream; 
+            if(url instanceof Readable){
+                nodeStream = url;
             }
+            else{
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Error al descargar el archivo: ${response.statusText}`);
+                }
 
-            const nodeStream = Readable.fromWeb(response.body);
+                nodeStream = Readable.fromWeb(response.body);
+            }
             const passThrough = new PassThrough();
             nodeStream.pipe(passThrough);
 

@@ -1,6 +1,6 @@
 {
   "name": "ytdp",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "youtube scraper",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "Sadgman",
   "license": "ISC",
   "dependencies": {
-    "@distube/ytdl-core": "^4.16.5",
+    "@distube/ytdl-core": "^4.16.8",
     "puppeteer": "^22.15.0",
     "readline-sync": "^1.4.10",
     "sharp": "^0.33.5",
